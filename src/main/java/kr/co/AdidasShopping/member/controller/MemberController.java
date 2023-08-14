@@ -1,10 +1,10 @@
 package kr.co.AdidasShopping.member.controller;
 
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +29,13 @@ public class MemberController {
 	// doGet - 페이지 이동용
 	@RequestMapping(value="/member/register.do", method=RequestMethod.GET)
 	public String showRegisterForm(Model model) {
-		
 		return "member/signUpPage";
 	}
 	
 	// doPost	데이터 저장용
 	@RequestMapping(value="/member/register.do", method=RequestMethod.POST)
 	public String registerMember(
-			HttpServletRequest request
-			, HttpServletResponse response
-			, @RequestParam("name") String memberName
+			@RequestParam("name") String memberName
 			, @RequestParam("username") String memberId
 			, @RequestParam("password") String memberPw
 			, @RequestParam("email") String memberEmail
@@ -48,12 +45,12 @@ public class MemberController {
 			, @RequestParam("address") String memberAddress
 			, Model model) {
 		
-		java.sql.Date memberBirthDate = null;
+		Date memberBirthDate = null;
 
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date parsedDate = dateFormat.parse(birthDateString);
-            memberBirthDate = new java.sql.Date(parsedDate.getTime());
+            memberBirthDate = new Date(parsedDate.getTime());
         } catch (ParseException e) {
             e.printStackTrace();
             // 오류 처리 로직 추가 (예: 사용자에게 오류 메시지 표시)
@@ -143,8 +140,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/shop/myPage.do", method=RequestMethod.GET)
 	public String showDetailMember(
-			HttpServletRequest request
-			, @RequestParam("memberId") String memberId
+			@RequestParam("memberId") String memberId
 			, Model model) {
 		Member member = service.showOneById(memberId);
 		if(member != null) {
@@ -158,8 +154,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/member/delete.do", method=RequestMethod.GET)
 	public String removeMember(
-			HttpServletRequest request
-			, @RequestParam("memberId") String memberId
+			@RequestParam("memberId") String memberId
 			, Model model) {
 		try {
 			int result = service.removeMember(memberId);

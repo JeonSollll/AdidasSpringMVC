@@ -39,9 +39,14 @@
 				</c:forEach>
 	            <tr>
 	            	<td colspan="5" align="center">
-	           		${pageNavi }
-            	</td>
-            </tr>
+           				${pageNavi }
+            		</td>
+           		</tr>
+           		<tr>
+	            	<td colspan="5" align="center">
+           				<a href=/notice/insert.do>글쓰기</a>
+            		</td>
+           		</tr>
 			</tbody>
 		</table>
 		<jsp:include page="/WEB-INF/views/include/footer.jsp"></jsp:include>
