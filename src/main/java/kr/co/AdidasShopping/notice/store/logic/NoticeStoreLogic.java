@@ -50,7 +50,7 @@ public class NoticeStoreLogic implements NoticeStore {
 		int totalCount = getTotalCount(sqlSession);
 		int recordCountPage = 10;
 		int naviTotalCount = (int) Math.ceil((double) totalCount / recordCountPage);
-		int naviCountPage = 10;
+		int naviCountPage = 5;
 		int startNavi = ((currentPage - 1)/naviCountPage) * naviCountPage + 1;
 		int endNavi = startNavi + naviCountPage - 1;
 		// endNavi값이 총 범위의 개수보다 커지는 것을 막아주는 코드
